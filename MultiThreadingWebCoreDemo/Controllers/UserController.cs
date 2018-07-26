@@ -55,10 +55,10 @@ namespace MultiThreadingWebCoreDemo.Controllers
         {
             var data = DbClientFactory<MultiprocessDbClient>.Instance.GetMultiprocessStatus(
                 appSettings.Value.DbConn, model.UserId,model.Module);
-            var obj = new Message<MultiprocessModel>();
-            obj.IsSuccess = true;
-            obj.Data = data;
-            return Json(obj);
+            var response = new Message<MultiprocessModel>();
+            response.IsSuccess = true;
+            response.Data = data;
+            return Json(response);
         }
     }
 }
