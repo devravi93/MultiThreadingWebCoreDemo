@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<button class="btn btn-success" id="btnStart">Start Request</button>
+
+@section Scripts{
+    <script>
+        var url = "@Url.Action("Test","User")";
+    </script>
+<script src="~/js/User/Index.js"></script>
+}
