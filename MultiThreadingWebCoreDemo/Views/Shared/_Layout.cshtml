@@ -16,11 +16,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
-    <script>
-        var multiProcessStatusGetUrl = "@Url.Action("GetMultiProcessStatus","User")";
-        var userId = "Ravi";
-        var moduleName = "User";
-    </script>
+   
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -64,7 +60,7 @@
 
     <div id="snackbar"></div>
 
-  
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -86,6 +82,12 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+
+    <script>
+        var multiProcessStatusGetUrl = "@Url.Action("GetMultiProcessStatus","User")";
+        var userId = "Ravi";
+        var moduleName = "User";
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>
