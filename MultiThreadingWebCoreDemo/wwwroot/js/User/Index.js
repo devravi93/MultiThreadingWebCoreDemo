@@ -8,7 +8,6 @@ $(function () {
     $('#btnStart').click(function () {
         if (isOperationInprogress) {
             alert('process already going on');
-            //notificationerror(operationInProgressMsg);
             return;
         }
         makeAjaxCall(url).

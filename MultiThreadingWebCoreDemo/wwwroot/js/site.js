@@ -67,8 +67,7 @@ function updateProgress(percentageBar) {
 }
 
 function getMultiProcessStatus(isOnLoad) {
-    //var obj = { userId: userId, moduleName: moduleName }
-    var obj = { UserId: 'Ravi', Module: 'User' }
+    var obj = { UserId: userId, Module: moduleName }
     makeAjaxCall(multiProcessStatusGetUrl, JSON.stringify(obj), "nsnn", 'POST')
         .done(function (response) {
             if (!response.IsSuccess) {

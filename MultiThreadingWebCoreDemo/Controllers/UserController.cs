@@ -33,17 +33,19 @@ namespace MultiThreadingWebCoreDemo.Controllers
             {
                 var conStr = appSettings.Value.DbConn;
                 var client = DbClientFactory<MultiprocessDbClient>.Instance;
-                var id = client.InsertMultiprocessStatus(conStr, "Ravi", "User", 50);
                 var totalRecords = 50;
-                var curr = 1;
+                var id = client.InsertMultiprocessStatus(conStr, "Ravi", "User", totalRecords);
                 int success = 0, fail = 0;
+                var isComplete = false;
                 for (int i = 0; i < totalRecords; i++)
                 {
+                    isComplete = false;
                     Thread.Sleep(500);
-                    decimal percentage = Convert.ToDecimal((Convert.ToDecimal(curr) / Convert.ToDecimal(totalRecords))) * Convert.ToDecimal(100);
+                    decimal percentage = Convert.ToDecimal((Convert.ToDecimal(i + 1) / Convert.ToDecimal(totalRecords))) * Convert.ToDecimal(100);
                     success++;
-                    curr++;
-                    client.UpdateMultiprocessStatus(conStr, id, percentage, false, fail, success);
+                    if ((success + fail) == totalRecords)
+                        isComplete = true;
+                    client.UpdateMultiprocessStatus(conStr, id, percentage, isComplete, fail, success);
                 }
             });
             var obj = new { isSuccess = isDone, returnMessage = msg };
@@ -54,7 +56,7 @@ namespace MultiThreadingWebCoreDemo.Controllers
         public JsonResult GetMultiProcessStatus([FromBody]MultiprocessModel model)
         {
             var data = DbClientFactory<MultiprocessDbClient>.Instance.GetMultiprocessStatus(
-                appSettings.Value.DbConn, model.UserId,model.Module);
+                appSettings.Value.DbConn, model.UserId, model.Module);
             var response = new Message<MultiprocessModel>();
             response.IsSuccess = true;
             response.Data = data;
